@@ -16,6 +16,6 @@ class Program
         if (x == 5){
             Console.WriteLine("HIII");
         }
-        Console.WriteLine($"My number is {x}");
+        Console.WriteLine($"My number is {x}, {name}");
     }
 }
