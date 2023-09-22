@@ -4,18 +4,48 @@ class Program
 {
     static void Main(string[] args)
     {
-        Console.WriteLine("Hello Sandbox World!");
-        Console.Write("There will not be a newline after this.");
-        Console.WriteLine(".......");
-        int x;
-        x = 5;
-        Console.WriteLine(x);
-        Console.Write("What is your name? ");
-        string name = Console.ReadLine();
+        List<string> colors = new List<string>
+        {
+            "Red",
+            "Green",
+            "Yellow",
+            "Black",
+            "White"
+        };
 
-        if (x == 5){
-            Console.WriteLine("HIII");
+        foreach (string color in colors){
+            Console.WriteLine(color);
         }
-        Console.WriteLine($"My number is {x}, {name}");
+        Console.WriteLine(colors.Count);
+        colors.Add("skyblue");
+        colors.Add("Brown");
+
+        foreach (string color in colors){
+            Console.WriteLine(color);
+        }
+        Console.WriteLine(colors.Count);
+
+        for (int i = 0; i < colors.Count; i++){
+            Console.WriteLine(colors[i]);
+        }
+
+        static void DisplayMessage(string name){
+            Console.WriteLine($"Hi {name}");
+            Console.WriteLine("How are you?");
+        
+        }
+        
+        DisplayMessage("Lizandro");
+        DisplayMessage("Rosa");
+
+        static int AddNumbers(int first, int second){
+            int sum = first + second;
+            return sum;
+        }
+
+        Console.WriteLine(AddNumbers(8,9));
+        Console.WriteLine(AddNumbers(8,10));
+        Console.WriteLine(AddNumbers(8,11));
+
     }
 }
