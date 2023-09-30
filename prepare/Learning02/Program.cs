@@ -15,7 +15,6 @@ class Program
         job1._endYear = 2020;
 
         //job1.Display();
-        //Console.WriteLine("++++++++++++");
 
         Job job2 = new Job();
         job2._jobTitle = "System Administrator";
@@ -24,7 +23,6 @@ class Program
         job2._endYear = 2023;
 
         //job2.Display();
-        //Console.WriteLine("++++++++++++");
 
         //RESUME
         Resume myResume = new Resume();
