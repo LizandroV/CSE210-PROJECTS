@@ -2,47 +2,106 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
-namespace Eternal_Quest
+namespace EternalQuest_APP
 {
-    public class Goal
+    public abstract class Goal
     {
-        protected string _name = "";
-        protected string _description = "";
-        protected int _points = 0;
+        private string _name;
+        private string _description;
+        protected double _points;
+        protected double _timesCompleted;
+        protected string _formattedString;
 
-        private List<string> Goals = new List<string>();
 
-        public Goal(string name, string description, int points)
+        public Goal()
         {
-            _name = name;
-            _description = description;
-            _points = points;
-
-            Goals.Add($"{_name},{_description},{_points}");
+            this._name = SetName();
+            this._description = SetDescription();
+            this._points = setPoints();
+            this._timesCompleted = 0;
+        }
+        public Goal(string name, string description, double points, int timesFinished)
+        {
+            this._name = name;
+            this._description = description;
+            this._points = points;
+            this._timesCompleted = timesFinished;
         }
 
-        public Goal(string savedString)
+        protected string SetName()
         {
-            _name = savedString;
+            Console.Write("What is the name of your goal? ");
+            return Console.ReadLine();
+        }
+        protected string SetDescription()
+        {
+            Console.Write("What is a short description of it? ");
+            return Console.ReadLine();
+        }
+        protected int setPoints()
+        {
+            Console.Write("What is the amount of points assosciated with this goal? ");
+            return int.Parse(Console.ReadLine());
+        }
+        public string GetName()
+        {
+            return this._name;
+        }
+        public string GetDescription()
+        {
+            return this._description;
+        }
+        public double GetPoints()
+        {
+            return this._points;
+        }
+        public double GetTimesFinished()
+        {
+            return this._timesCompleted;
+        }
+        public virtual int GetReachBonus()
+        {
+            return 0;
+        }
+        public virtual int GetBonusPoints()
+        {
+            return 0;
         }
 
-        public virtual int RecordEvent()
+        public double AwardPoints(double points)
         {
-            _points = 0;
-            return _points;
+            Console.WriteLine($"Congratualations! You have earned {this._points} points!\n");
+            return points;
         }
 
-        public virtual string ToSavedString()
+        public virtual double RecordEvent()
         {
-            _name = "";
-            return _name;
+            this._timesCompleted += 1;
+            return 0;
         }
 
-        public override string ToString()
+        public abstract bool IsComplete();
+
+        public virtual void ListGoal()
         {
-            _name = "";
-            return _name;
+            if (IsComplete())
+            {
+                Console.Write($" [X] {this._name} ({this._description})");
+            }
+            if (!IsComplete())
+            {
+                Console.Write($" [ ] {this._name} ({this._description})");
+            }
+        }
+
+        public virtual string SerializeSelf()
+        {
+            this._formattedString += $":{this.GetName()}"
+                                    + $":{this.GetDescription()}:{this.GetPoints()}"
+                                    + $":{this.GetTimesFinished()}";
+            return this._formattedString;
         }
     }
 }
